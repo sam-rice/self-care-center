@@ -75,7 +75,11 @@ span {
     padding-right: 30px;
     margin-bottom: -10px;
     border-radius: 5px;
+    opacity: 0.4;
+}
 
+.button-enabled {
+    opacity: 1;
 }
 
 .message-div {
@@ -89,9 +93,24 @@ span {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .message-div p {
-    font-size: 1.3em;
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    margin-top: 25px;
+}
+
+.clear-button {
+    font-family: "Quicksand";
+    font-size: .8em;
+    font-weight: light;
+    color: #ffffff;
+    background-color: #134d71;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: -28px;
+    border-radius: 5px;
 }
 
