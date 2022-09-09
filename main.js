@@ -38,6 +38,9 @@ var mantras = [
 
 var messageButton = document.querySelector(".message-button");
 
+//HTML ELEMENT QUERY SELECTORS
+var messageDiv = document.querySelector('.message-div');
+
 
 //EVENT LISTENERS
 
@@ -49,17 +52,22 @@ messageButton.addEventListener("click", getRandomMessage)
 function getRandomMessage() { 
     var allRadios = document.getElementsByName("message-type");
     var targetArray;
+
     for (var i = 0; i < allRadios.length; i++) {
         if (allRadios[i].checked) {
-            targetArray = allRadios[i].value;
-        }
-    }
+            targetArray = eval(allRadios[i].value);
+        };
+    };
+
     var randomMessage = targetArray[getRandomIndex(targetArray)];
-    console.log(randomMessage);
+    displayMessage(randomMessage);
 }
 
-function displayMessage() {
-
+function displayMessage(message) {
+    messageDiv.innerHTML = "";
+    messageDiv.innerHTML = `
+    <p>${message}</p>
+    `
 }
 
 function getRandomIndex(array) {
