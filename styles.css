@@ -11,6 +11,10 @@ html {
     height: 100%;
 }
 
+main {
+    min-width: 100%;
+}
+
 body {
     height: 100%;
     margin: 0;
@@ -47,20 +51,19 @@ h2 {
 }
 
 .radio-div {
-    /* display: flex;
+    min-width: 90%;
+    display: flex;
+    align-items: center;
     flex-direction: row;
-    justify-content: center; */
-
+    justify-content: space-around;
 }
 
 span {
     font-style: italic;
     font-size: 1.2em;
-    margin-left: 80px;
-    margin-right: 80px;
 }
 
-button {
+.message-button {
     font-family: "Quicksand";
     font-size: 1.1em;
     font-weight: light;
@@ -88,4 +91,7 @@ button {
     align-items: center;
 }
 
+.message-div p {
+    font-size: 1.3em;
+}
 
