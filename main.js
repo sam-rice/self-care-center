@@ -75,9 +75,20 @@ function getRandomMessage() {
 function displayMessage(message) {
     messageDiv.innerHTML = "";
     messageDiv.innerHTML = `
+
     <p>${message}</p>
+    <button class="clear-button">clear</button>
+
     `
+    return (document.querySelector(".clear-button")).addEventListener("click", clearMessage)
 };
+
+function clearMessage() {
+    messageDiv.innerHTML = "";
+    messageDiv.innerHTML = `
+    <img src="./assets/meditate.svg" width="9%" height="5%">
+    `
+}
 
 function getRandomIndex(array) {
     return Math.floor(Math.random() * array.length);
