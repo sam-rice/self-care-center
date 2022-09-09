@@ -39,8 +39,8 @@ var mantras = [
 var messageDiv = document.querySelector('.message-div');
 var messageButtonContainer = document.querySelector(".button-container");
 
-// var messageButton = document.querySelector("#message-button");
-// above is now unused bc of returned expression from enableButton()
+var messageButton = document.querySelector("#message-button");
+
 
 var allRadios = document.getElementsByName("message-type");
 
@@ -51,8 +51,7 @@ var mantraRadio = document.getElementById("radio-mantra");
 
 //EVENT LISTENERS
 
-// messageButton.addEventListener("click", getRandomMessage);
-// above is now unused bc of returned expression from enableButton()
+messageButton.addEventListener("click", getRandomMessage);
 
 affirmationRadio.addEventListener("click", enableButton);
 mantraRadio.addEventListener("click", enableButton);
@@ -78,15 +77,13 @@ function displayMessage(message) {
 
     <p>${message}</p>
     <button class="clear-button">clear</button>
-
     `
     return (document.querySelector(".clear-button")).addEventListener("click", clearMessage)
 };
 
 function clearMessage() {
-    messageDiv.innerHTML = "";
     messageDiv.innerHTML = `
-    <img src="./assets/meditate.svg" width="9%" height="5%">
+    <img src="./assets/meditate.svg" width="40%" height="40%">
     `
 }
 
@@ -97,9 +94,6 @@ function getRandomIndex(array) {
   //ERROR HANDLING
 
 function enableButton() {
-    messageButtonContainer.innerHTML = `
-    <button class="message-button button-enabled" id="message-button">Receive Message</button>
-    `
-
-    return (document.querySelector(".message-button")).addEventListener("click", getRandomMessage);
+    messageButton.removeAttribute("disabled");
+    messageButton.classList.add("button-enabled");
 };
