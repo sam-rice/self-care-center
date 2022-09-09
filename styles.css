@@ -75,7 +75,11 @@ span {
     padding-right: 30px;
     margin-bottom: -10px;
     border-radius: 5px;
+    opacity: 0.4;
+}
 
+.button-enabled {
+    opacity: 1;
 }
 
 .message-div {

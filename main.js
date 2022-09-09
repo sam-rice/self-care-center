@@ -34,25 +34,34 @@ var mantras = [
     "I am the sky, the rest is weather."
 ];
 
-//RADIO ELEMENTS/BUTTONS
-
-var messageButton = document.querySelector(".message-button");
-
 //HTML ELEMENT QUERY SELECTORS
+
 var messageDiv = document.querySelector('.message-div');
+var messageButtonContainer = document.querySelector(".button-container");
+
+// var messageButton = document.querySelector("#message-button");
+// above is now unused bc of returned expression from enableButton()
+
+var allRadios = document.getElementsByName("message-type");
+
+
+var affirmationRadio = document.getElementById("radio-affirmation");
+var mantraRadio = document.getElementById("radio-mantra");
 
 
 //EVENT LISTENERS
 
-messageButton.addEventListener("click", getRandomMessage)
+// messageButton.addEventListener("click", getRandomMessage);
+// above is now unused bc of returned expression from enableButton()
 
+affirmationRadio.addEventListener("click", enableButton);
+mantraRadio.addEventListener("click", enableButton);
 
 //EVENT HANDLERS
 
 function getRandomMessage() { 
-    var allRadios = document.getElementsByName("message-type");
+    console.log("test")
     var targetArray;
-
     for (var i = 0; i < allRadios.length; i++) {
         if (allRadios[i].checked) {
             targetArray = eval(allRadios[i].value);
@@ -61,15 +70,25 @@ function getRandomMessage() {
 
     var randomMessage = targetArray[getRandomIndex(targetArray)];
     displayMessage(randomMessage);
-}
+};
 
 function displayMessage(message) {
     messageDiv.innerHTML = "";
     messageDiv.innerHTML = `
     <p>${message}</p>
     `
-}
+};
 
 function getRandomIndex(array) {
     return Math.floor(Math.random() * array.length);
   };
+
+  //ERROR HANDLING
+
+function enableButton() {
+    messageButtonContainer.innerHTML = `
+    <button class="message-button button-enabled" id="message-button">Receive Message</button>
+    `
+
+    return (document.querySelector(".message-button")).addEventListener("click", getRandomMessage);
+};
