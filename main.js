@@ -1,4 +1,4 @@
-//DATA MODEL
+//------------------DATA MODEL------------------
 
 var affirmations = [
     "I forgive myself and set myself free.",
@@ -34,7 +34,7 @@ var mantras = [
     "I am the sky, the rest is weather."
 ];
 
-//HTML ELEMENT QUERY SELECTORS
+//------------------HTML ELEMENT QUERY SELECTORS------------------
 
 var messageDiv = document.querySelector('.message-div');
 var messageButtonContainer = document.querySelector(".button-container");
@@ -49,17 +49,16 @@ var affirmationRadio = document.getElementById("radio-affirmation");
 var mantraRadio = document.getElementById("radio-mantra");
 
 
-//EVENT LISTENERS
+//------------------EVENT LISTENERS------------------
 
 messageButton.addEventListener("click", getRandomMessage);
 
 affirmationRadio.addEventListener("click", enableButton);
 mantraRadio.addEventListener("click", enableButton);
 
-//EVENT HANDLERS
+//------------------EVENT HANDLERS------------------
 
 function getRandomMessage() { 
-    console.log("test")
     var targetArray;
     for (var i = 0; i < allRadios.length; i++) {
         if (allRadios[i].checked) {
@@ -72,7 +71,6 @@ function getRandomMessage() {
 };
 
 function displayMessage(message) {
-    messageDiv.innerHTML = "";
     messageDiv.innerHTML = `
 
     <p>${message}</p>
@@ -85,13 +83,13 @@ function clearMessage() {
     messageDiv.innerHTML = `
     <img src="./assets/meditate.svg" width="40%" height="40%">
     `
-}
+};
 
 function getRandomIndex(array) {
     return Math.floor(Math.random() * array.length);
-  };
+};
 
-  //ERROR HANDLING
+  //------------------ERROR HANDLING------------------
 
 function enableButton() {
     messageButton.removeAttribute("disabled");
