@@ -48,15 +48,51 @@ var allRadios = document.getElementsByName("message-type");
 var affirmationRadio = document.getElementById("radio-affirmation");
 var mantraRadio = document.getElementById("radio-mantra");
 
+// var messagePara;
+// var clearButton;
+// var clearListener;
 
 //------------------EVENT LISTENERS------------------
 
-messageButton.addEventListener("click", getRandomMessage);
-
+messageButton.addEventListener("click", messageSequence);
+//was getRandomMessage ^
 affirmationRadio.addEventListener("click", enableButton);
 mantraRadio.addEventListener("click", enableButton);
 
 //------------------EVENT HANDLERS------------------
+
+function messageSequence() {
+    setTimeout(getRandomMessage, 6000);
+    setTimeout(loadAnimation, 500);
+    bellFade();
+
+}
+
+function bellFade() {
+    document.querySelector(".bell").classList.add("bell-fade");
+
+    // clearButton.classList.add("message-div-transition");
+
+    // messagePara.classList.add("message-div-transition");
+
+}
+
+function loadAnimation() {
+    document.querySelector(".load-container").innerHTML = `
+    <div class="moon"></div>
+    <div class="crescent"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    `
+    document.querySelector(".clear-button").classList.add("message-div-transition");
+
+    document.querySelector("#message-id").classList.add("message-div-transition");
+}
+
+function startLoad() {
+    console.log("2 second delay")
+}
 
 function getRandomMessage() { 
     var targetArray;
@@ -73,17 +109,34 @@ function getRandomMessage() {
 function displayMessage(message) {
     messageDiv.innerHTML = `
 
-    <p>${message}</p>
+    <p class="message-div-par" id="message-id">${message}</p>
     <button class="clear-button">clear</button>
+    <div class="load-container"></div>
     `
-    return (document.querySelector(".clear-button")).addEventListener("click", clearMessage)
+    // return (document.querySelector(".clear-button")).addEventListener("click", clearMessage)
+
+    var messagePara = document.querySelector("#message-id");
+    var clearButton = document.querySelector(".clear-button");
+    var clearListener = clearButton.addEventListener("click", clearMessage);
+
+    return [messagePara, clearButton, clearListener];
 };
 
 function clearMessage() {
-    messageDiv.innerHTML = `
-    <img src="./assets/meditate.svg" width="40%" height="40%">
-    `
+
+    document.querySelector(".clear-button").classList.add("clear-transition");
+
+    document.querySelector("#message-id").classList.add("clear-transition");
+
+    setTimeout(displayBell, 2000)
 };
+
+function displayBell() {
+    messageDiv.innerHTML = `
+    <img src="./assets/meditate.svg" class="bell" width="40%" height="40%">
+    <div class="load-container"></div>
+    `
+}
 
 function getRandomIndex(array) {
     return Math.floor(Math.random() * array.length);

@@ -105,13 +105,25 @@ label {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: relative;
 }
 
-.message-div p {
+.message-div-par {
     font-size: 1.5em;
     margin-bottom: 30px;
     margin-top: 25px;
-    /* animation: fadeIn 2s;  */
+    animation: fadeIn 4s; 
+    z-index: 5;
+}
+
+.bell {
+    position: absolute;
+    z-index: 4;
+    animation: fadeIn 3s;
+}
+
+.bell-fade {
+    animation: bellFade 7s;
 }
 
 .clear-button {
@@ -124,18 +136,140 @@ label {
     padding-right: 30px;
     margin-bottom: -28px;
     border-radius: 5px;
+    animation: fadeIn 3s;
 }
+
+.message-div-transition {
+    animation: fadeOut 7s;
+}
+
+.clear-transition {
+    animation: quickFade 2s;
+}
+
+.load-container {
+    position: absolute;
+    transform-origin: center;
+    display: flex;
+    align-items: center;
+
+}
+
+.moon {
+    position: absolute;
+    transform-origin: center;
+    background: rgb(74, 108, 186);
+    width: 30px;
+    height: 30px;
+    transform: translate(-5%, -5%);
+    border-radius: 50%;
+    z-index: 1;
+    animation: fadeInOut 5s linear forwards 1, moonRotate 5s linear forwards 1;
+}
+
+.crescent {
+    position: absolute;
+    transform-origin: center;
+    background: #ffffff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transform: translate(25%, -5%);
+    z-index: 2;
+    animation: moonRotate 5s linear forwards 1;
+}
+
+.circle {
+    background: #f7e4bf;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border:#134d71 solid .11px;
+    position: absolute;
+    z-index: 3; 
+}
+
+.circle:nth-child(3) {
+    animation: rotateChildThree 5s ease-in-out forwards 1, bounceX 5s ease-in-out forwards 1, fadeInOut 5s linear forwards 1;
+    /* background: blue; */
+}
+
+ .circle:nth-child(4) {
+    rotate: .33turn;
+    animation: rotateChildFour 5s ease-in-out forwards 1, bounceX 5s ease-in-out forwards 1, fadeInOut 5s linear forwards 1;
+    /* background: green; */
+}
+
+.circle:nth-child(5) {
+    rotate: .66turn;
+    animation: rotateChildFive 5s ease-in-out forwards 1, bounceX 5s ease-in-out forwards 1, fadeInOut 5s linear forwards 1;
+    /* background: red; */
+} 
 
 
 /* ------------------ANIMATIONS------------------ */
-/* 
+
 @keyframes fadeIn {
     0% {opacity: 0;}
-    100%{opacity:1;}
+    100% {opacity: 1;}
 }
- */
 
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    10% {opacity: 0;}
+    100% {opacity: 0;}
+}
 
+@keyframes bellFade {
+    0% {opacity: 1;}
+    25% {opacity: 0;}
+    100% {opacity: 0;}
+}
+
+@keyframes quickFade {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+@keyframes fadeInOut {
+    0% {opacity: 0;}
+    10% {opacity: 0;}
+    30% {opacity: 1;}
+    80% {opacity: 1;}
+    100% { opacity: 0;}
+}
+
+@keyframes moonRotate {
+    100% {
+        rotate: -.075turn;
+    }
+}
+
+@keyframes rotateChildThree {
+    100% {
+        rotate: .66turn;
+    }
+}
+
+@keyframes rotateChildFour {
+    100% {
+        rotate: 1turn;
+    }
+}
+
+@keyframes rotateChildFive {
+    100% {
+        rotate: 1.33turn;
+    }
+}
+
+@keyframes bounceX {
+    0% {transform: translateX(0px);}
+    25% {transform: translateX(40px);}
+    50% {transform: translateX(15px);}
+    75% {transform: translateX(40px);}
+    100% {transform: translateX(0px);}
+}
 
 /* ------------------MEDIA QUERIES------------------*/
 
