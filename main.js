@@ -36,6 +36,7 @@ var mantras = [
 
 //------------------HTML ELEMENT QUERY SELECTORS------------------
 
+var body = document.querySelector("body");
 var messageDiv = document.querySelector('.message-div');
 var messageButtonContainer = document.querySelector(".button-container");
 
@@ -51,6 +52,12 @@ var mantraRadio = document.getElementById("radio-mantra");
 // var messagePara;
 // var clearButton;
 // var clearListener;
+
+//------------------DOM------------------
+
+var pageView;
+
+
 
 //------------------EVENT LISTENERS------------------
 
@@ -90,9 +97,6 @@ function loadAnimation() {
     document.querySelector("#message-id").classList.add("message-div-transition");
 }
 
-function startLoad() {
-    console.log("2 second delay")
-}
 
 function getRandomMessage() { 
     var targetArray;
@@ -103,6 +107,8 @@ function getRandomMessage() {
     };
 
     var randomMessage = targetArray[getRandomIndex(targetArray)];
+
+    changeBackground(targetArray);
     displayMessage(randomMessage);
 };
 
@@ -113,14 +119,30 @@ function displayMessage(message) {
     <button class="clear-button">clear</button>
     <div class="load-container"></div>
     `
-    // return (document.querySelector(".clear-button")).addEventListener("click", clearMessage)
-
-    var messagePara = document.querySelector("#message-id");
     var clearButton = document.querySelector(".clear-button");
     var clearListener = clearButton.addEventListener("click", clearMessage);
 
-    return [messagePara, clearButton, clearListener];
+    return [clearButton, clearListener];
 };
+
+function changeBackground() {
+
+    // if (pageView === "mantras") {
+
+    // }
+
+
+    for (var i = 0; i < allRadios.length; i++) {
+        if (allRadios[i].checked) {
+            body.className = `${allRadios[i].value}-background`;
+            return pageView = allRadios[i].value
+        };
+    };
+}
+
+function homeBackground() {
+    body.className = "";
+}
 
 function clearMessage() {
 
@@ -129,6 +151,7 @@ function clearMessage() {
     document.querySelector("#message-id").classList.add("clear-transition");
 
     setTimeout(displayBell, 2000)
+    setTimeout(homeBackground, 2000)
 };
 
 function displayBell() {
