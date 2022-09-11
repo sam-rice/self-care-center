@@ -1,4 +1,4 @@
-//DATA MODEL
+//------------------DATA MODEL------------------
 
 var affirmations = [
     "I forgive myself and set myself free.",
@@ -34,33 +34,60 @@ var mantras = [
     "I am the sky, the rest is weather."
 ];
 
-//HTML ELEMENT QUERY SELECTORS
+
+//------------------MISC FUNCTIONS------------------
+
+function getRandomIndex(array) {
+    return Math.floor(Math.random() * array.length);
+};
+
+
+//------------------HTML ELEMENT QUERY SELECTORS------------------
+
+var body = document.querySelector("body");
 
 var messageDiv = document.querySelector('.message-div');
 var messageButtonContainer = document.querySelector(".button-container");
-
-// var messageButton = document.querySelector("#message-button");
-// above is now unused bc of returned expression from enableButton()
+var messageButton = document.querySelector("#message-button");
 
 var allRadios = document.getElementsByName("message-type");
-
-
 var affirmationRadio = document.getElementById("radio-affirmation");
 var mantraRadio = document.getElementById("radio-mantra");
 
 
-//EVENT LISTENERS
+//------------------EVENT LISTENERS------------------
 
-// messageButton.addEventListener("click", getRandomMessage);
-// above is now unused bc of returned expression from enableButton()
+messageButton.addEventListener("click", messageSequence);
 
 affirmationRadio.addEventListener("click", enableButton);
 mantraRadio.addEventListener("click", enableButton);
 
-//EVENT HANDLERS
+//------------------EVENT HANDLERS------------------
+
+function messageSequence() {
+    setTimeout(getRandomMessage, 6000);
+    setTimeout(loadAnimation, 500);
+    bellFade();
+};
+
+function bellFade() {
+    document.querySelector(".bell").classList.add("bell-fade");
+};
+
+function loadAnimation() {
+    document.querySelector(".load-container").innerHTML = `
+    <div class="moon"></div>
+    <div class="crescent"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    `
+    document.querySelector(".clear-button").classList.add("message-div-transition");
+    document.querySelector("#message-id").classList.add("message-div-transition");
+};
+
 
 function getRandomMessage() { 
-    console.log("test")
     var targetArray;
     for (var i = 0; i < allRadios.length; i++) {
         if (allRadios[i].checked) {
@@ -69,37 +96,55 @@ function getRandomMessage() {
     };
 
     var randomMessage = targetArray[getRandomIndex(targetArray)];
+
+    changeBackground(targetArray);
     displayMessage(randomMessage);
 };
 
 function displayMessage(message) {
-    messageDiv.innerHTML = "";
     messageDiv.innerHTML = `
-
-    <p>${message}</p>
+    <p class="message-div-par" id="message-id">${message}</p>
     <button class="clear-button">clear</button>
-
+    <div class="load-container"></div>
     `
-    return (document.querySelector(".clear-button")).addEventListener("click", clearMessage)
+    var clearButton = document.querySelector(".clear-button");
+    var clearListener = clearButton.addEventListener("click", clearMessage);
+
+    return [clearButton, clearListener];
 };
 
-function clearMessage() {
-    messageDiv.innerHTML = "";
-    messageDiv.innerHTML = `
-    <img src="./assets/meditate.svg" width="9%" height="5%">
-    `
+function changeBackground() {
+    for (var i = 0; i < allRadios.length; i++) {
+        if (allRadios[i].checked) {
+            body.className = `${allRadios[i].value}-background`;
+            return pageView = allRadios[i].value;
+        };
+    };
+};
+
+function homeBackground() {
+    body.className = "";
 }
 
-function getRandomIndex(array) {
-    return Math.floor(Math.random() * array.length);
-  };
+function clearMessage() {
+    document.querySelector(".clear-button").classList.add("clear-transition");
+    document.querySelector("#message-id").classList.add("clear-transition");
 
-  //ERROR HANDLING
+    setTimeout(displayBell, 2000);
+    setTimeout(homeBackground, 2000);
+};
+
+function displayBell() {
+    messageDiv.innerHTML = `
+    <img src="./assets/meditate.svg" class="bell" width="40%" height="40%">
+    <div class="load-container"></div>
+    `
+};
+
+
+  //------------------ERROR HANDLING------------------
 
 function enableButton() {
-    messageButtonContainer.innerHTML = `
-    <button class="message-button button-enabled" id="message-button">Receive Message</button>
-    `
-
-    return (document.querySelector(".message-button")).addEventListener("click", getRandomMessage);
+    messageButton.removeAttribute("disabled");
+    messageButton.classList.add("button-enabled");
 };
