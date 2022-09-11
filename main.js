@@ -34,35 +34,31 @@ var mantras = [
     "I am the sky, the rest is weather."
 ];
 
+
+//------------------MISC FUNCTIONS------------------
+
+function getRandomIndex(array) {
+    return Math.floor(Math.random() * array.length);
+};
+
+
 //------------------HTML ELEMENT QUERY SELECTORS------------------
 
 var body = document.querySelector("body");
+
 var messageDiv = document.querySelector('.message-div');
 var messageButtonContainer = document.querySelector(".button-container");
-
 var messageButton = document.querySelector("#message-button");
 
-
 var allRadios = document.getElementsByName("message-type");
-
-
 var affirmationRadio = document.getElementById("radio-affirmation");
 var mantraRadio = document.getElementById("radio-mantra");
-
-// var messagePara;
-// var clearButton;
-// var clearListener;
-
-//------------------DOM------------------
-
-var pageView;
-
 
 
 //------------------EVENT LISTENERS------------------
 
 messageButton.addEventListener("click", messageSequence);
-//was getRandomMessage ^
+
 affirmationRadio.addEventListener("click", enableButton);
 mantraRadio.addEventListener("click", enableButton);
 
@@ -72,17 +68,11 @@ function messageSequence() {
     setTimeout(getRandomMessage, 6000);
     setTimeout(loadAnimation, 500);
     bellFade();
-
-}
+};
 
 function bellFade() {
     document.querySelector(".bell").classList.add("bell-fade");
-
-    // clearButton.classList.add("message-div-transition");
-
-    // messagePara.classList.add("message-div-transition");
-
-}
+};
 
 function loadAnimation() {
     document.querySelector(".load-container").innerHTML = `
@@ -93,9 +83,8 @@ function loadAnimation() {
     <div class="circle"></div>
     `
     document.querySelector(".clear-button").classList.add("message-div-transition");
-
     document.querySelector("#message-id").classList.add("message-div-transition");
-}
+};
 
 
 function getRandomMessage() { 
@@ -114,7 +103,6 @@ function getRandomMessage() {
 
 function displayMessage(message) {
     messageDiv.innerHTML = `
-
     <p class="message-div-par" id="message-id">${message}</p>
     <button class="clear-button">clear</button>
     <div class="load-container"></div>
@@ -126,32 +114,24 @@ function displayMessage(message) {
 };
 
 function changeBackground() {
-
-    // if (pageView === "mantras") {
-
-    // }
-
-
     for (var i = 0; i < allRadios.length; i++) {
         if (allRadios[i].checked) {
             body.className = `${allRadios[i].value}-background`;
-            return pageView = allRadios[i].value
+            return pageView = allRadios[i].value;
         };
     };
-}
+};
 
 function homeBackground() {
     body.className = "";
 }
 
 function clearMessage() {
-
     document.querySelector(".clear-button").classList.add("clear-transition");
-
     document.querySelector("#message-id").classList.add("clear-transition");
 
-    setTimeout(displayBell, 2000)
-    setTimeout(homeBackground, 2000)
+    setTimeout(displayBell, 2000);
+    setTimeout(homeBackground, 2000);
 };
 
 function displayBell() {
@@ -159,11 +139,8 @@ function displayBell() {
     <img src="./assets/meditate.svg" class="bell" width="40%" height="40%">
     <div class="load-container"></div>
     `
-}
-
-function getRandomIndex(array) {
-    return Math.floor(Math.random() * array.length);
 };
+
 
   //------------------ERROR HANDLING------------------
 
